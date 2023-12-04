@@ -16,7 +16,7 @@ export class CatsService {
   async findAll(): Promise<Cat[]> {
     try {
       const allCats = await this.catsRepository.find();
-      return allCats
+      return allCats;
     } catch (error) {
       throw new Error(
         'Erro ao buscar gatos no banco de dados: ' + error.message,
