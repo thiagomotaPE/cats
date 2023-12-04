@@ -1,16 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Cat } from './interfaces/cat.interface';
-import { PrismaService } from 'src/infra/prisma/prisma.service';
+//import { PrismaService } from 'src/infra/prisma/prisma.service';
 import { CreateCatDto } from './dto/create-cat.dto';
+import { Cats } from './entities/cats.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CatsService {
-  constructor(private readonly prisma: PrismaService) {}
+  //constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    @Inject('CATS_REPOSITORY') 
+    private catsRepository: Repository<Cats>,
+    ) {}
 
   async findAll(): Promise<Cat[]> {
     try {
-      const allCats = await this.prisma.cats.findMany();
-      return allCats;
+      const allCats = await this.catsRepository.find();
+      return allCats
     } catch (error) {
       throw new Error(
         'Erro ao buscar gatos no banco de dados: ' + error.message,
@@ -20,13 +26,11 @@ export class CatsService {
 
   async create(createCatDto: CreateCatDto) {
     try {
-      const newCat = await this.prisma.cats.create({
-        data: {
+      const newCat = this.catsRepository.save({
           cat_name: createCatDto.name,
           cat_age: createCatDto.age,
           cat_breed: createCatDto.breed,
-        },
-      });
+      },);
       return {
         newCat,
       };
@@ -35,5 +39,5 @@ export class CatsService {
         'Erro ao adicionar gato no banco de dados: ' + error.message,
       );
     }
-  }
+   }
 }

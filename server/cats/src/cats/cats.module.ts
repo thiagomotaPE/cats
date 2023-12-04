@@ -3,11 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CatsController } from './cats.controller';
 import { CatsService } from './cats.service';
 import { PrismaService } from 'src/infra/prisma/prisma.service';
-import { Cats } from './entities/cats.entity';
+import { TypeormModule } from 'src/infra/typeorm/typeorm/typeorm.module';
+import { catsProviders } from './cats.providers';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Cats])],
+  imports: [TypeormModule ],
   controllers: [CatsController],
-  providers: [CatsService, PrismaService],
+  providers: [CatsService, PrismaService, ...catsProviders],
 })
 export class CatsModule {}
