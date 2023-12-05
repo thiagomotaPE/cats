@@ -6,21 +6,32 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
-    
+
     constructor(
         @Inject('USERS_REPOSITORY') 
         private usersRepository: Repository<Users>,
     ) {}
     
     async findAll(): Promise<User[]> {
-    try {
-        const allUsers = await this.usersRepository.find();
-        return allUsers;
-    } catch (error) {
-        throw new Error(
-        'Erro ao buscar usuarios no banco de dados: ' + error.message,
-        );
+        try {
+            const allUsers = await this.usersRepository.find();
+            return allUsers;
+        } catch (error) {
+            throw new Error(
+            'Erro ao buscar usuarios no banco de dados: ' + error.message,
+            );
+        }
     }
+
+    async findOneById(id: number): Promise<User[]> {
+        try {
+            const user = await this.usersRepository.findBy({id: id});
+            return user;
+        } catch (error) {
+            throw new Error(
+            'Erro ao buscar usuario no banco de dados: ' + error.message,
+            );
+        }
     }
     
     async create(createUserDto: CreateUserDto) {

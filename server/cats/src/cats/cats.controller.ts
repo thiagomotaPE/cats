@@ -18,7 +18,7 @@ export class CatsController {
 
   //Rota para adicionar um gato ao banco de dados
   @Post()
-  @Roles(Role.Admin)
+  // @Roles(Role.Admin)
   async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
   }

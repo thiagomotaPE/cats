@@ -1,7 +1,7 @@
 import { IsEmail, IsInt, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
 import { PrimaryGeneratedColumn } from 'typeorm';
 
-export class CreateUserDto {
+export class SignInDto {
 
   @PrimaryGeneratedColumn()
   id: number;
