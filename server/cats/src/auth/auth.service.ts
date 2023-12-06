@@ -3,6 +3,7 @@ import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { Users } from 'src/users/entities/users.entity';
 import { User } from 'src/users/interfaces/user.interface';
+import { error } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,7 @@ export class AuthService {
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.user_password);
-        if(!isPasswordValid) return null;
+        if(!isPasswordValid) return "Senha invalida";
 
         return user;
     }
