@@ -5,8 +5,9 @@ import { TypeormModule } from 'src/infra/typeorm/typeorm/typeorm.module';
 import { UsersProviders } from './users.providers';
 
 @Module({
-  imports: [TypeormModule ],
+  imports: [TypeormModule],
   controllers: [UsersController],
-  providers: [UsersService, ...UsersProviders]
+  providers: [UsersService, ...UsersProviders],
+  exports: [UsersService],
 })
 export class UsersModule {}

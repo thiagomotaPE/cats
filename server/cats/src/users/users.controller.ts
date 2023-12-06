@@ -13,8 +13,8 @@ export class UsersController {
     }
 
     @Get(':id')
-    async findOne(@Param('id') id: number ): Promise<User[]> {
-        return this.usersService.findOneById(+id);
+    async findOne(@Param('id') id: string ): Promise<User> {
+        return this.usersService.findOneBy(id);
     }
 
     @Post()

@@ -1,10 +1,10 @@
 import { IsEmail, IsInt, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 export class CreateUserDto {
 
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
   
   @IsString({ message: 'Nome precisa ser uma string' })
   @IsNotEmpty({ message: 'Nome não pode ser vazio' })

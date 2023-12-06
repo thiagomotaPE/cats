@@ -1,10 +1,6 @@
-import { IsEmail, IsInt, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { IsEmail, IsNotEmpty, IsString, IsStrongPassword } from 'class-validator';
 
-export class SignInDto {
-
-  @PrimaryGeneratedColumn()
-  id: number;
+export class LogInDto {
   
   @IsString({ message: 'Nome precisa ser uma string' })
   @IsNotEmpty({ message: 'Nome não pode ser vazio' })
