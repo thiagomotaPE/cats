@@ -9,5 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+  constructor() {
+    console.log('login component')
+  }
 }
