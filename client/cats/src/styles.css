@@ -3,9 +3,5 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-html{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 10vh 80vh 10vh;
+    background-color: #84bcda;
 }

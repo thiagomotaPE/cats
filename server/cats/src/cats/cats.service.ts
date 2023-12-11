@@ -40,4 +40,15 @@ export class CatsService {
       );
     }
    }
+
+   async deleteById(id) {
+    try {
+      const cat = await this.catsRepository.findOne({where:{id: id}});
+      return this.catsRepository.delete(cat);
+      } catch (error) {
+        throw new Error(
+        'Erro ao deletar gato no banco de dados: ' + error.message,
+        );
+      }
+    }
 }

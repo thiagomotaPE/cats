@@ -1,10 +1,9 @@
-import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards, ValidationPipe } from '@nestjs/common';
 
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/role.enum';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('cats')
 export class CatsController {
@@ -17,9 +16,14 @@ export class CatsController {
   }
 
   //Rota para adicionar um gato ao banco de dados
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  // @Roles(Role.Admin)
   async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);
+  }
+
+  @Delete(':id')
+  async deleteCatById(@Param('id') id: string) {
+    return this.catsService.deleteById(+id);
   }
 }

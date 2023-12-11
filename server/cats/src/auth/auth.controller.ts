@@ -5,10 +5,14 @@ import { LogInDto } from './dto/log-in.dto';
 
 @Controller('api/auth')
 export class AuthController {
-    constructor(private authService: AuthService) {}
+    constructor(private readonly authService: AuthService) {}
 
+    @UseGuards(AuthGuard('local'))
     @Post('login')
-    login(@Body() logInDto: LogInDto) {
-        return this.authService.validateUser(logInDto.email, logInDto.password);
+    async login(@Body() logInDto: LogInDto) {
+        const user = this.authService.validateUser(logInDto.email, logInDto.password);
+        if (!user) return null;
+
+        return this.authService.generateToken(await user);
     }
 }

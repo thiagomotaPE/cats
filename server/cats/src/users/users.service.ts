@@ -69,4 +69,15 @@ export class UsersService {
             );
         }
     }
+
+    async deleteById(id) {
+        try {
+          const user = await this.usersRepository.findOne({where:{id: id}});
+          return this.usersRepository.delete(user);
+          } catch (error) {
+            throw new Error(
+            'Erro ao deletar usuario do banco de dados: ' + error.message,
+            );
+          }
+        }
 }
