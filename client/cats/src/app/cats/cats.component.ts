@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-layout',
+  selector: 'app-cats',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  templateUrl: './cats.component.html',
 })
-export class LayoutComponent {
+export class CatsComponent {
 
 }

@@ -1,0 +1,9 @@
+<div class="container">
+    <form class="content" (ngSubmit)="onSubmit()">
+        <h2 class="form-title">Cadastrar Gato</h2>
+        <input type="text" [(ngModel)]="cat.cat_name" name="cat_name" id="cat_name" class="form-input" placeholder="Nome">
+        <input type="number" [(ngModel)]="cat.cat_age" name="cat_age" id="cat_age" class="form-input" placeholder="Idade">
+        <input type="text" [(ngModel)]="cat.cat_breed" name="cat_breed" id="cat_breed" class="form-input" placeholder="Raça">
+        <input type="submit" value="Cadastrar" class="form-buttom">
+    </form>
+</div>

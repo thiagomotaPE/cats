@@ -13,7 +13,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     PassportModule, 
     JwtModule.register({
       privateKey: 'd41d8cd98f00b204e9800998ecf8427e',
-      signOptions: { expiresIn: '500s' },
+      signOptions: { expiresIn: '24h' },
     })
   ],
   controllers: [AuthController],

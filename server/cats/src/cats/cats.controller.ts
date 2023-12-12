@@ -5,6 +5,7 @@ import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
 import { AuthGuard } from '@nestjs/passport';
 
+// @UseGuards(AuthGuard('jwt'))
 @Controller('cats')
 export class CatsController {
   constructor(private catsService: CatsService) {}
@@ -16,7 +17,6 @@ export class CatsController {
   }
 
   //Rota para adicionar um gato ao banco de dados
-  @UseGuards(AuthGuard('jwt'))
   @Post()
   async create(@Body(new ValidationPipe()) createCatDto: CreateCatDto) {
     this.catsService.create(createCatDto);

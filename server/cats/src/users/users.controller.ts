@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './interfaces/user.interface';
 import { AuthGuard } from '@nestjs/passport';
 
+// @UseGuards(AuthGuard('jwt'))
 @Controller('users')
 export class UsersController {
     constructor(private usersService: UsersService) {}
@@ -18,7 +19,7 @@ export class UsersController {
         return this.usersService.findOneBy(id);
     }
 
-    @UseGuards(AuthGuard('jwt'))
+    
     @Post()
     async create(@Body(new ValidationPipe()) createUserDto: CreateUserDto) {
         this.usersService.create(createUserDto);
