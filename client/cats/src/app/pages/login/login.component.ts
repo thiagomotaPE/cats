@@ -24,6 +24,13 @@ export class LoginComponent {
   }
 
   login() {
-    this.authService.authorizeUser(this.user);
+    this.authService.authorizeUser(this.user).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }
