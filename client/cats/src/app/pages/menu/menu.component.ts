@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CatsService } from '../../cats/cats.service';
 import { Cat } from '../../cats/cat';
@@ -16,7 +16,8 @@ export class MenuComponent implements OnInit {
   cats: Cat[] = [];
 
   remove(cat: Cat) {
-    this.catsService.deleteCat(cat.cat_name);
+    this.catsService.deleteCat(cat.id).subscribe();
+    return window.alert('Gato removido com sucesso!');
   }
 
   ngOnInit(): void {

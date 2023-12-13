@@ -9,19 +9,19 @@ import { environment } from "../../environments/environment";
 export class CatsService {
     constructor( private http: HttpClient) {}
 
-    
-    cats: Cat[] = [];
-
     getAllCats() {
         return this.http.get<Cat[]>(`${environment.api}/cats`);   
     }
 
     saveNewCat(newCat: Cat) {
-        this.cats.push(newCat);
+        return this.http.post<Cat>(`${environment.api}/cats`, {
+            name: newCat.cat_name,
+            age: newCat.cat_age,
+            breed: newCat.cat_breed
+        });
     }
 
-    deleteCat(name:String) {
-        const catIndex = this.cats.findIndex((value) => value.cat_name == name);
-        this.cats.splice(catIndex, 1);
+    deleteCat(id:String) {
+        return this.http.delete<Cat[]>(`${environment.api}/cats/${id}`); 
     }
 }

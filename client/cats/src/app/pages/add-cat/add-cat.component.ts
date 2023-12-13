@@ -11,17 +11,15 @@ import { CatsService } from '../../cats/cats.service';
   templateUrl: './add-cat.component.html',
   styleUrl: './add-cat.component.css'
 })
-export class AddCatComponent implements OnInit {
+export class AddCatComponent {
   cat: Cat = {id: '', cat_name: '', cat_age: 0, cat_breed: '' };
 
   constructor(private catsService: CatsService) {}
 
   onSubmit() {
-    this.catsService.saveNewCat(this.cat);
+    this.catsService.saveNewCat(this.cat).subscribe(cat => {
+      console.log(cat);
+    });
     return window.alert('Gato cadastrado com sucesso!');
-  }
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 }
