@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../security/login/auth.service';
 import { User } from '../../users/user';
 import { FormsModule } from '@angular/forms';
+import { Jwt } from '../../security/login/jwt';
+import { AuthInterceptor } from '../../security/auth-interceptor.module';
 
 @Component({
   selector: 'app-login',
@@ -20,16 +22,18 @@ export class LoginComponent {
     user_password: '',
   }
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router, private authInterceptor: AuthInterceptor) {
   }
 
   login() {
-    this.authService.authorizeUser(this.user).subscribe(
-      (data) => {
+    return this.authService.authorizeUser(this.user).subscribe(
+      (data: Jwt) => {
         console.log(data);
+        this.router.navigate(['/menu']);
       },
       (error) => {
         console.error(error);
+        window.alert('Usuario não cadastrado!')
       }
     );
   }

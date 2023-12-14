@@ -3,6 +3,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { MenuComponent } from './pages/menu/menu.component';
 import { AddCatComponent } from './pages/add-cat/add-cat.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
+import { AuthGuardService } from './security/login/auth-guard.service';
 
 export const routes: Routes = [
     {path: '', component: LoginComponent},

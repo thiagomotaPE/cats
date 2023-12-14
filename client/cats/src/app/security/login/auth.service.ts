@@ -1,30 +1,40 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../users/user';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Jwt } from '../../users/jwt';
-import { Observable } from 'rxjs';
+import { Jwt } from './jwt';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userAuth: boolean = false;
-  constructor(private http: HttpClient , private router: Router) {}
+  jwtToken!: string | null;
+  constructor(private http: HttpClient) {}
 
   authorizeUser(user: User): Observable<Jwt> {
-    return this.http.post<Jwt>(`${environment.api}/api/auth/login`, user);
+    return this.http.post<Jwt>(`${environment.api}/api/auth/login`, {
+      name: user.user_name,
+      email: user.user_email,
+      password: user.user_password
+    }).pipe(tap((jwt: Jwt) => {
+      this.setToken(jwt.token);
+    }));
+  }
 
-    // if(user.user_email == 'thiago@gmail.com' && user.user_password == '1234') {
-    //   this.userAuth = true;
-    //   this.router.navigate(['/menu']);
-    // } else if(user.user_email == 'damazio@gmail.com' && user.user_password == '1234') {
-    //   this.userAuth = true;
-    //   this.router.navigate(['/menu']);
-    // } else {
-    //   this.userAuth = false;
-    //   window.alert('Usuario não cadastrado');
-    // }
+  isAuthenticated(): boolean {
+    return Boolean(this.getToken());
+  }
+  
+  private setToken(token: string): void {
+    this.jwtToken = token;
+    localStorage.setItem('jwtToken', token);
+  }
+
+  private getToken(): string | null {
+    if (!this.jwtToken) {
+      this.jwtToken = localStorage.getItem('jwtToken');
+    }
+    return this.jwtToken;
   }
 }

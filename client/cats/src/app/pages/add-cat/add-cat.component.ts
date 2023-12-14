@@ -19,7 +19,7 @@ export class AddCatComponent {
   onSubmit() {
     this.catsService.saveNewCat(this.cat).subscribe(cat => {
       console.log(cat);
+      return window.alert('Gato cadastrado com sucesso!');
     });
-    return window.alert('Gato cadastrado com sucesso!');
   }
 }
