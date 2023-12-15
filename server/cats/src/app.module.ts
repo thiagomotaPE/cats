@@ -4,9 +4,15 @@ import { PrismaService } from './infra/prisma/prisma.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CatsModule, UsersModule, TypeOrmModule, AuthModule],
+  imports: [
+    ConfigModule.forRoot(),
+    CatsModule, 
+    UsersModule, 
+    TypeOrmModule, 
+    AuthModule],
   providers: [PrismaService],
 })
 export class AppModule {}
