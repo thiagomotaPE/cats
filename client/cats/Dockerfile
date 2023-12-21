@@ -1,13 +1,17 @@
-FROM node:20
+FROM node:20 as angular
 
-WORKDIR /app
+WORKDIR /usr/src/front
 
 COPY . .
 
 RUN npm install --quiet --no-optional --no-fund --loglevel=error
 
-RUN npm run build
-
-EXPOSE 4200
-
 CMD ["ng", "serve"]     
+
+FROM nginx:alpine
+
+VOLUME /var/cache/nginx
+
+COPY --from=angular app/dist/cats /usr/share/nginx/html
+
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
