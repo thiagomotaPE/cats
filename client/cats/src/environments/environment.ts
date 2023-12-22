@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    api: 'cats_api_container'
+    api: 'http://localhost:3000'
 }

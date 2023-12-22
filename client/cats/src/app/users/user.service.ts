@@ -10,7 +10,7 @@ export class UsersService {
     constructor( private http: HttpClient) {}
 
     saveNewUser(newUser: User) {
-        return this.http.post<User>(`${environment.api}/users`, {
+        return this.http.post<User>(`http://localhost:3000/users`, {
             name: newUser.user_name,
             email: newUser.user_email,
             password: newUser.user_password
