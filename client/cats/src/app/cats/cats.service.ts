@@ -10,7 +10,7 @@ export class CatsService {
     constructor( private http: HttpClient) {}
 
     getAllCats() {
-        return this.http.get<Cat[]>(`${environment.api}/cats`);   
+        return this.http.get<Cat[]>(`http://localhost:3000/cats`);   
     }
 
     saveNewCat(newCat: Cat) {
