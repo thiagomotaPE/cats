@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  backend:
+    build: ./server/cats/
+    restart: always
+    volumes:
+      - ./server/cats:/usr/src/api
+    ports:
+      - "3000:3000"
+    networks:
+      - cats_network
+
+  frontend:
+    depends_on:
+      - backend
+    build: ./client/cats/
+    restart: always
+    volumes:
+      - ./client/cats:/usr/src/front
+    ports:
+      - "4200:80"
+    networks:
+      - cats_network
+networks:
+ cats_network:
