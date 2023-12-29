@@ -2,16 +2,19 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS
 import { Injectable, NgModule } from "@angular/core";
 import { Observable } from "rxjs";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthInterceptor implements HttpInterceptor {
+    
     intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = localStorage.getItem('user_logged');
+        const token = localStorage.getItem('jwtToken');
         if(!token){
             return next.handle(req);
         }
         var _user = JSON.parse(token);
         const dupReq = req.clone({
-           headers: req.headers.set('authorization', (_user && _user.token) ? 'Bearer ' + _user.token : '')
+           headers: req.headers.set('Authorization', (_user && _user.token) ? 'Bearer ' + _user.token : '')
         });
         return next.handle(dupReq);
     }
@@ -24,4 +27,4 @@ export class AuthInterceptor implements HttpInterceptor {
        multi: true,
     }]
  })
- export class Interceptor { }
+ export class Interceptor {}

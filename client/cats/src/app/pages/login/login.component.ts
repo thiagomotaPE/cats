@@ -28,7 +28,7 @@ export class LoginComponent {
   login() {
     return this.authService.authorizeUser(this.user).subscribe(
       (data: Jwt) => {
-        console.log(data);
+        // console.log(data);
         this.router.navigate(['/menu']);
       },
       (error) => {
