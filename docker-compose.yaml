@@ -4,8 +4,6 @@ services:
   backend:
     build: ./server/cats/
     restart: always
-    volumes:
-      - ./server/cats:/usr/src/api
     ports:
       - "3000:3000"
     networks:
@@ -16,8 +14,6 @@ services:
       - backend
     build: ./client/cats/
     restart: always
-    volumes:
-      - ./client/cats:/usr/src/front
     ports:
       - "4200:80"
     networks:

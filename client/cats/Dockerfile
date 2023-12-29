@@ -4,9 +4,9 @@ WORKDIR /usr/src/front
 
 COPY . .
 
-RUN npm install --quiet --no-optional --no-fund --loglevel=error 
+RUN npm install
 
-CMD ["ng", "build"]  
+RUN npm run build
 
 FROM nginx:alpine
 
