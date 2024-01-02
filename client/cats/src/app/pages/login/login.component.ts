@@ -30,6 +30,7 @@ export class LoginComponent {
       (data: Jwt) => {
         // console.log(data);
         this.router.navigate(['/menu']);
+        console.log(this.authInterceptor);
       },
       (error) => {
         console.error(error);
