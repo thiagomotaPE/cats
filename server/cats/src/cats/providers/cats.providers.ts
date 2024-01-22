@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm"
-import { Cats } from "./entities/cats.entity"
+import { Cats } from "../entities/cats.entity"
 
 export const catsProviders = [{
     provide: 'CATS_REPOSITORY',

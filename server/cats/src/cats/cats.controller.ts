@@ -3,7 +3,7 @@ import { Body, Controller, Delete, Get, Param, Post, UseGuards, ValidationPipe }
 import { CreateCatDto } from './dto/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
 
 // @UseGuards(AuthGuard('jwt'))
 @Controller('cats')

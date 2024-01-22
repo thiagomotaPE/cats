@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, UseGuards, ValidationPipe }
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './interfaces/user.interface';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
 
 // @UseGuards(AuthGuard('jwt'))
 @Controller('users')
